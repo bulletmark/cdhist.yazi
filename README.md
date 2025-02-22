@@ -1,7 +1,7 @@
 # cdhist.yazi - cdhist plugin for Yazi
 
-[Yazi][yazi] plugin for [cdhist][cdhist] to fuzzy select and navigate within
-[Yazi][yazi] from your directory history.
+[Yazi][yazi] plugin for [cdhist][cdhist] to fuzzy select and navigate from your
+directory history within the [Yazi][yazi] terminal file manager.
 
 ## Installation
 
@@ -22,7 +22,7 @@ run  = "plugin cdhist -- _ --fuzzy=fzf"
 desc = "Select a directory from history using cdhist"
 ```
 
-Make sure you have [cdhist][cdhist] installed, and can be found in `PATH`.
+Make sure you have [cdhist][cdhist] installed, and can be found in your `PATH`.
 
 The above assigns `Alt-c` key mapping within yazi to bring up the fuzzy search
 because it is the standard key mapping for [opening fzf on
