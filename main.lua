@@ -1,0 +1,44 @@
+local function fail(s, ...)
+	ya.notify({ title = "cdhist", content = s:format(...), timeout = 5, level = "error" })
+end
+
+local function entry(_, job)
+	ya.hide()
+
+	local args = { "--" }
+    -- Yazi plugins only support long options at present
+	for k, v in pairs(job.args or {}) do
+		if type(k) == "string" then
+			if v and v ~= "" then
+				table.insert(args, 1, v)
+			end
+
+			table.insert(args, 1, "--" .. k)
+		end
+	end
+
+	local child, err =
+		Command("cdhist"):args(args):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.PIPED):spawn()
+
+	if not child or err then
+		return fail("Failed to start `cdhist`, error: " .. err)
+	end
+
+	local output, err = child:wait_with_output()
+	if err then
+		return fail("Cannot read `cdhist` output, error: " .. err)
+	end
+
+	if output.stderr ~= "" then
+		return fail("Error from `cdhist`:" .. output.stderr)
+	end
+
+	local dir = output.stdout:gsub("\n$", "")
+	if dir ~= "" then
+		ya.manager_emit("cd", { dir })
+	end
+end
+
+return { entry = entry }
+
+-- vim: sw=4:ts=4:sts=4:et
