@@ -1,3 +1,6 @@
+local ya = require("ya")
+local Command = require("Command")
+
 local function fail(s, ...)
 	ya.notify({ title = "cdhist", content = s:format(...), timeout = 5, level = "error" })
 end
@@ -17,16 +20,16 @@ local function entry(_, job)
 		end
 	end
 
-	local child, err =
+	local child, err_run =
 		Command("cdhist"):args(args):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.PIPED):spawn()
 
-	if not child or err then
-		return fail("Failed to start `cdhist`, error: " .. err)
+	if not child or err_run then
+		return fail("Failed to start `cdhist`, error: " .. err_run)
 	end
 
-	local output, err = child:wait_with_output()
-	if err then
-		return fail("Cannot read `cdhist` output, error: " .. err)
+	local output, err_out = child:wait_with_output()
+	if err_out then
+		return fail("Cannot read `cdhist` output, error: " .. err_out)
 	end
 
 	if output.stderr ~= "" then
