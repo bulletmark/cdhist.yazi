@@ -2,44 +2,44 @@ local ya = require("ya")
 local Command = require("Command")
 
 local function fail(s, ...)
-	ya.notify({ title = "cdhist", content = s:format(...), timeout = 5, level = "error" })
+    ya.notify({ title = "cdhist", content = s:format(...), timeout = 5, level = "error" })
 end
 
 local function entry(_, job)
-	ya.hide()
+    ya.hide()
 
-	local args = { "--" }
+    local args = { "--" }
     -- Yazi plugins only support long options at present
-	for k, v in pairs(job.args or {}) do
-		if type(k) == "string" then
-			if v and v ~= "" then
-				table.insert(args, 1, v)
-			end
+    for k, v in pairs(job.args or {}) do
+        if type(k) == "string" then
+            if v and v ~= "" then
+                table.insert(args, 1, v)
+            end
 
-			table.insert(args, 1, "--" .. k)
-		end
-	end
+            table.insert(args, 1, "--" .. k)
+        end
+    end
 
-	local child, err_run =
-		Command("cdhist"):args(args):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.PIPED):spawn()
+    local child, err_run =
+        Command("cdhist"):args(args):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.PIPED):spawn()
 
-	if not child or err_run then
-		return fail("Failed to start `cdhist`, error: " .. err_run)
-	end
+    if not child or err_run then
+        return fail("Failed to start `cdhist`, error: " .. err_run)
+    end
 
-	local output, err_out = child:wait_with_output()
-	if err_out then
-		return fail("Cannot read `cdhist` output, error: " .. err_out)
-	end
+    local output, err_out = child:wait_with_output()
+    if err_out then
+        return fail("Cannot read `cdhist` output, error: " .. err_out)
+    end
 
-	if output.stderr ~= "" then
-		return fail("Error from `cdhist`:" .. output.stderr)
-	end
+    if output.stderr ~= "" then
+        return fail("Error from `cdhist`:" .. output.stderr)
+    end
 
-	local dir = output.stdout:gsub("\n$", "")
-	if dir ~= "" then
-		ya.manager_emit("cd", { dir })
-	end
+    local dir = output.stdout:gsub("\n$", "")
+    if dir ~= "" then
+        ya.manager_emit("cd", { dir })
+    end
 end
 
 return { entry = entry }
