@@ -1,6 +1,3 @@
-local ya = require("ya")
-local Command = require("Command")
-
 local function fail(s, ...)
     ya.notify({ title = "cdhist", content = s:format(...), timeout = 5, level = "error" })
 end
