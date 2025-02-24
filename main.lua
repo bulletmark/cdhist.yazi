@@ -1,8 +1,10 @@
+local M = {}
+
 local function fail(s, ...)
-    ya.notify({ title = "cdhist", content = s:format(...), timeout = 5, level = "error" })
+    error(string.format(s, ...))
 end
 
-local function entry(_, job)
+function M:entry(job)
     ya.hide()
 
     local args = { "--" }
@@ -39,6 +41,5 @@ local function entry(_, job)
     end
 end
 
-return { entry = entry }
-
+return M
 -- vim: sw=4:ts=4:sts=4:et
