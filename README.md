@@ -1,7 +1,7 @@
-# cdhist.yazi - cdhist plugin for Yazi
+# cdhist.yazi - Yazi plugin to use cdhist to select and navigate to a previous directory
 
-[Yazi][yazi] plugin for [cdhist][cdhist] to fuzzy select and navigate from your
-directory history within the [Yazi][yazi] terminal file manager.
+[Yazi][yazi] plugin to use [cdhist][cdhist] to fuzzy select and navigate from
+your directory history, within the [Yazi][yazi] terminal file manager.
 
 ## Installation
 
@@ -33,14 +33,13 @@ However, you may prefer to remap the standard `z` key mapping in yazi to
 replace [`zoxide`](https://yazi-rs.github.io/docs/quick-start/#navigation), or
 use a spare key like the `C` key.
 
-Note that any of the popular command line fuzzy search finders such as
-[`fzf`][fzf], [`sk`][skim], [`tv`][television], or [`fzy`][fzy] can be used in
-the above configuration setting. Or leave the `--fuzzy` option out to use
-native simple [cdhist index selection](https://github.com/bulletmark/cdhist#example-usage).
+Note [`fzf`][fzf] is preferred for cdhist fuzzy searching, but you can also use
+[`sk`][skim], or [`fzy`][fzy] in the above configuration setting. Or leave the
+`--fuzzy` option out to use native simple [cdhist index
+selection](https://github.com/bulletmark/cdhist#example-usage).
 
 [yazi]: https://yazi-rs.github.io/
 [cdhist]: http://github.com/bulletmark/cdhist
 [fzf]: https://github.com/junegunn/fzf
 [fzy]: https://github.com/jhawthorn/fzy
 [skim]: https://github.com/skim-rs/skim
-[television]: https://github.com/alexpasmantier/television
