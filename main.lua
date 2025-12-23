@@ -20,7 +20,7 @@ function M:entry(job)
     end
 
     local child, err_run =
-        Command("cdhist"):args(args):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.PIPED):spawn()
+        Command("cdhist"):arg(args):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.PIPED):spawn()
 
     if not child or err_run then
         return fail("Failed to start `cdhist`, error: " .. err_run)
