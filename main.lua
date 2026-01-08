@@ -5,7 +5,7 @@ local function fail(s, ...)
 end
 
 function M:entry(job)
-    ya.hide()
+    ui.hide()
 
     local args = { "--" }
     -- Yazi plugins only support long options at present
@@ -37,7 +37,7 @@ function M:entry(job)
 
     local dir = output.stdout:gsub("\n$", "")
     if dir ~= "" then
-        ya.manager_emit("cd", { dir })
+        ya.emit("cd", {dir})
     end
 end
 
