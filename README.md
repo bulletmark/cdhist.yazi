@@ -29,9 +29,7 @@ because it is the standard key mapping for [opening fzf on
 directories](https://github.com/junegunn/fzf?tab=readme-ov-file#key-bindings-for-command-line)
 and for [using with
 cdhist](https://github.com/bulletmark/cdhist#fuzzy-finder-integration).
-However, you may prefer to remap the standard `z` key mapping in yazi to
-replace [`zoxide`](https://yazi-rs.github.io/docs/quick-start/#navigation), or
-use a spare key like the `C` key.
+However, you may prefer to use a spare key like the `C` key.
 
 Note [`fzf`][fzf] is preferred for cdhist fuzzy searching, but you can also use
 [`sk`][skim], or [`fzy`][fzy] in the above configuration setting. Or leave the
